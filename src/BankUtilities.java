@@ -42,6 +42,35 @@ public class BankUtilities{
         int randomNumber = ThreadLocalRandom.current().nextInt(minVal, maxVal + 1);
         return randomNumber;
     }
-
+    public void openAccount(){
+        System.out.println("opening account");
+    }
+    public void getAccountInfoAndBalance(){
+        System.out.println("Getting account info and balance");
+    }
+    public void changePin(){
+        System.out.println("Changing PIN");
+    }
+    public void depositMoneyToAccount(){
+        System.out.println("Depositing Money to account");
+    }
+    public void transferBetweenAccounts(){
+        System.out.println("Transferring money between accounts");
+    }
+    public void withdrawFromAccount(){
+        System.out.println("Withdrawing money from account");
+    }
+    public void withdrawFromATM(){
+        System.out.println("Withdrawing money from ATM");
+    }
+    public void depositChange(){
+        System.out.println("Depositing Change to account");
+    }
+    public void closeAccount(){
+        System.out.println("Closing account");
+    }
+    public void addMonthlyInterest(){
+        System.out.println("Adding a monthly interest to all accounts");
+    }
 
 }

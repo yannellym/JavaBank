@@ -26,6 +26,7 @@ public class BankManager {
 
     public void continousMenu() {
         printMenu();
+        System.out.println("Please enter your menu choice: ");
         int user_choice = scanner.nextInt();
         // valid user choices
         int[] choices = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
@@ -36,42 +37,60 @@ public class BankManager {
 //      else, if the user choice is not in the valid user choices, redirect them to the menu again
 //      if the user choice is not a number, redirect them to the menu again
         try {
+            Boolean checkChoice = false;
             for (int option : choices) {
                 if (option == user_choice) {
-                    switch (user_choice) {
-                        case 1:
-                            return utilities.openAccount();
-                        case 2:
-                            return utilities.getAccountInfoAndBalance();
-                        case 3:
-                            return utilities.changePin();
-                        case 4:
-                            return utilities.depositMoneyToAccount();
-                        case 5:
-                            return utilities.transferBetweenAccounts();
-                        case 6:
-                            return utilities.withdrawFromAccount();
-                        case 7:
-                            return utilities.withdrawFromATM();
-                        case 8:
-                            return utilities.depositChange();
-                        case 9:
-                            return utilities.closeAccount();
-                        case 10:
-                            utilities.addMonthlyInterest();
-                            continousMenu();
-                        case 11:
-                            System.out.println("Thank you for using JavaBank. Have a good day!");
-                            break;
-                        continousMenu();
-                    }
-                } else {
-                    System.out.println("Please enter a numeric character. Try again. ");
-                    continousMenu();
+                    checkChoice = true;
                 }
             }
+            if (checkChoice){
+                switch (user_choice) {
+                    case 1:
+                        utilities.openAccount();
+                        break;
+                    case 2:
+                        utilities.getAccountInfoAndBalance();
+                        break;
+                    case 3:
+                        utilities.changePin();
+                        break;
+                    case 4:
+                        utilities.depositMoneyToAccount();
+                        break;
+                    case 5:
+                        utilities.transferBetweenAccounts();
+                        break;
+                    case 6:
+                        utilities.withdrawFromAccount();
+                        break;
+                    case 7:
+                        utilities.withdrawFromATM();
+                        break;
+                    case 8:
+                        utilities.depositChange();
+                        break;
+                    case 9:
+                        utilities.closeAccount();
+                        break;
+                    case 10:
+                        utilities.addMonthlyInterest();
+                        continousMenu();
+                    case 11:
+                        System.out.println("Thank you for using JavaBank. Have a good day!");
+                        break;
+                }
+            }
+            else{
+                System.out.println("Please enter a numeric character. Try again. ");
+                continousMenu();
+            }
+        } catch (Exception e) {
+            System.out.println("Choice is not in options. Please try again");
+            continousMenu();
         }
     }
+
+
 }
 //    public Account promptForAccountNumberAndPIN(Bank bank){
 //        System.out.println("Please enter an account number: ");
