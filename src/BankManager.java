@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class BankManager extends Bank {
     Scanner scanner = new Scanner(System.in);
+    Bank bank = new Bank();
 
     public static void main(String[] args) {
 
@@ -26,14 +27,23 @@ public class BankManager extends Bank {
         System.out.println(menu);
     }
 
-    public void promptForAccountNumberAndPIN(Bank bankObj){
+    public Account promptForAccountNumberAndPIN(Bank bank){
         System.out.println("Please enter an account number: ");
         long accNumber = scanner.nextLong();
-        for (long numberInArr : bankObj.accounts){
-            if (numberInArr == accNumber){
+        for (singleAccount : bank.allAccounts){
+            if (singleAccount.accNumber == accNumber){
                 System.out.println("Please enter PIN:");
+                int accPin = scanner.nextInt();
+                if(accPin != accNumber.pin){
+                    System.out.println("Invalid PIN");
+                    return null;
+                }
+                else{
+                    return accNumber;
+                }
             }
         }
         System.out.println("Account not found for account number:" + accNumber);
+        return null;
     }
 }

@@ -1,8 +1,5 @@
 
 public class Bank {
-    long[] accounts = {123, 555};
+     Account[] allAccounts = new Account[2];
 
-    public void Hello(){
-        System.out.println("Hellow from Bank class");
-    }
 }
