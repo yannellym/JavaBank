@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class BankUtilities {
+public class BankUtilities{
     Scanner scanner = new Scanner(System.in);
 
     /**
@@ -30,6 +30,7 @@ public class BankUtilities {
         return positiveNum;
     }
     public long convertFromDollarsToCents(double dollars){
+
         return (long) dollars;
     }
 

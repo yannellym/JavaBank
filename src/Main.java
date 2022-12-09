@@ -22,8 +22,9 @@
 public class Main {
     public static void main(String[] args) {
         BankManager manager = new BankManager();
-        Bank bank = new Bank();
-        manager.promptForAccountNumberAndPIN(bank);
+        manager.continousMenu();
+
+
 //        String prompt = "Please enter a number: ";
 //        BankUtilities utilities = new BankUtilities();
 //        // Double positiveNum = utilities.promptUserForPositiveNumber(prompt);
