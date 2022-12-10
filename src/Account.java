@@ -1,10 +1,10 @@
-public class Account extends Bank{
-    private final long accNumber;
-    private final String ownerFirstName;
-    private final String ownerLastName;
+public class Account {
+    private long accNumber;
+    private String ownerFirstName;
+    private String ownerLastName;
     private long ssn;
     private int PIN;
-    private float balance;
+    private double balance;
 
 
     public long getAccNumber() {
@@ -31,15 +31,15 @@ public class Account extends Bank{
         this.PIN = PIN;
     }
 
-    public float getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(float balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
-    Account(long accNumber, String ownerFirstName, String ownerLastName, long ssn, int PIN, float balance){
+    public void setData(long accNumber, String ownerFirstName, String ownerLastName, long ssn, int PIN, double balance){
         this.accNumber = accNumber;
         this.ownerFirstName = ownerFirstName;
         this.ownerLastName = ownerLastName;

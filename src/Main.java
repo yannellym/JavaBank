@@ -23,6 +23,7 @@ public class Main {
     public static void main(String[] args) {
         BankManager manager = new BankManager();
         manager.continousMenu();
+        manager.bank.
 
 
 //        String prompt = "Please enter a number: ";
