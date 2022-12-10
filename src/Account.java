@@ -1,11 +1,10 @@
 public class Account {
-    private long accNumber;
-    private String ownerFirstName;
-    private String ownerLastName;
-    private long ssn;
-    private int PIN;
-    private double balance;
-
+    public long accNumber;
+    public String ownerFirstName;
+    public String ownerLastName;
+    public long ssn;
+    public int PIN;
+    public double balance;
 
     public long getAccNumber() {
         return accNumber;

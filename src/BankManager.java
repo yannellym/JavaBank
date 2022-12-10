@@ -24,7 +24,7 @@ public class BankManager {
         System.out.println(menu);
     }
 
-    public void continousMenu() {
+    public void continuousMenu() {
         printMenu();
         System.out.println("Please enter your menu choice: ");
         int user_choice = scanner.nextInt();
@@ -43,72 +43,46 @@ public class BankManager {
                     checkChoice = true;
                 }
             }
-            if (checkChoice){
-                switch (user_choice) {
-                    case 1:
-                        utilities.openAccount();
-                        break;
-                    case 2:
-                        utilities.getAccountInfoAndBalance();
-                        break;
-                    case 3:
-                        utilities.changePin();
-                        break;
-                    case 4:
-                        utilities.depositMoneyToAccount();
-                        break;
-                    case 5:
-                        utilities.transferBetweenAccounts();
-                        break;
-                    case 6:
-                        utilities.withdrawFromAccount();
-                        break;
-                    case 7:
-                        utilities.withdrawFromATM();
-                        break;
-                    case 8:
-                        utilities.depositChange();
-                        break;
-                    case 9:
-                        utilities.closeAccount();
-                        break;
-                    case 10:
-                        utilities.addMonthlyInterest();
-                        continousMenu();
-                    case 11:
-                        System.out.println("Thank you for using JavaBank. Have a good day!");
-                        break;
-                }
-            }
-            else{
-                System.out.println("Please enter a numeric character. Try again. ");
-                continousMenu();
-            }
         } catch (Exception e) {
             System.out.println("Choice is not in options. Please try again");
-            continousMenu();
+            continuousMenu();
         }
+
+        switch (user_choice) {
+            case 1:
+                utilities.openAccount();
+                break;
+            case 2:
+                utilities.getAccountInfoAndBalance();
+                break;
+            case 3:
+                utilities.changePin();
+                break;
+            case 4:
+                utilities.depositMoneyToAccount();
+                break;
+            case 5:
+                utilities.transferBetweenAccounts();
+                break;
+            case 6:
+                utilities.withdrawFromAccount();
+                break;
+            case 7:
+                utilities.withdrawFromATM();
+                break;
+            case 8:
+                utilities.depositChange();
+                break;
+            case 9:
+                utilities.closeAccount();
+                break;
+            case 10:
+                utilities.addMonthlyInterest();
+                continuousMenu();
+            case 11:
+                System.out.println("Thank you for using JavaBank. Have a good day!");
+                break;
+        }
+
     }
-
-
 }
-//    public Account promptForAccountNumberAndPIN(Bank bank){
-//        System.out.println("Please enter an account number: ");
-//        long accNumber = scanner.nextLong();
-//        for (singleAccount : bank.allAccounts){
-//            if (singleAccount.accNumber == accNumber){
-//                System.out.println("Please enter PIN:");
-//                int accPin = scanner.nextInt();
-//                if(accin != accNumber.PIN){
-//                    System.out.println("Invalid PIN");
-//                    return null;
-//                }
-//                else{
-//                    return accNumber;
-//                }
-//            }
-//        }
-//        System.out.println("Account not found for account number:" + accNumber);
-//        return null;
-//    }
-

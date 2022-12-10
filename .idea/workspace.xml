@@ -5,6 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Account.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BankManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BankManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BankUtilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BankUtilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,5 +60,15 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

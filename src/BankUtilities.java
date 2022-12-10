@@ -1,8 +1,9 @@
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class BankUtilities{
+public class BankUtilities extends Bank{
     Scanner scanner = new Scanner(System.in);
+
 
     /**
      *
@@ -43,7 +44,11 @@ public class BankUtilities{
         return randomNumber;
     }
     public void openAccount(){
-        System.out.println("opening account");
+        // System.out.println("opening account");
+
+        BankUtilities.all_accounts[0] = new Account();
+        BankUtilities.all_accounts[0].setData(12345,"Nelly","Merc",4213, 9999, 500.58);
+        System.out.println(BankUtilities.all_accounts);
     }
     public void getAccountInfoAndBalance(){
         System.out.println("Getting account info and balance");
@@ -72,5 +77,20 @@ public class BankUtilities{
     public void addMonthlyInterest(){
         System.out.println("Adding a monthly interest to all accounts");
     }
-
+    public Account promptForAccountNumberAndPIN(){
+        System.out.println("Please enter an account number: ");
+        long accNumber = scanner.nextLong();
+        for (Account singleAccount : all_accounts){
+            if (singleAccount.accNumber == accNumber){
+                System.out.println("Please enter PIN:");
+                int accPin = scanner.nextInt();
+                if(accPin != singleAccount.PIN){
+                    System.out.println("Invalid PIN");
+                }
+                openAccount();
+            }
+        }
+        System.out.println("Account not found for account number:" + accNumber);
+        return null;
+    }
 }
