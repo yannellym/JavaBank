@@ -5,7 +5,14 @@ public class Account {
     public long ssn;
     public int PIN;
     public double balance;
-
+    public Account(long accNumber, String ownerFirstName, String ownerLastName, long ssn, int PIN, double balance){
+        this.accNumber = accNumber;
+        this.ownerFirstName = ownerFirstName;
+        this.ownerLastName = ownerLastName;
+        this.ssn = ssn;
+        this.PIN = PIN;
+        this.balance = balance;
+    }
     public long getAccNumber() {
         return accNumber;
     }
@@ -38,14 +45,6 @@ public class Account {
         this.balance = balance;
     }
 
-    public void setData(long accNumber, String ownerFirstName, String ownerLastName, long ssn, int PIN, double balance){
-        this.accNumber = accNumber;
-        this.ownerFirstName = ownerFirstName;
-        this.ownerLastName = ownerLastName;
-        this.ssn = ssn;
-        this.PIN = PIN;
-        this.balance = balance;
-    }
     public long deposit(long depositAmount){
         // take the amount and deposit it into the account
         // return a long representing a new account balance
@@ -64,9 +63,5 @@ public class Account {
     public String toString(){
         // return a string that contains all values in account
         return "String";
-    }
-
-    public static void main(String[] args) {
-
     }
 }

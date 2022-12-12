@@ -44,11 +44,12 @@ public class BankUtilities extends Bank{
         return randomNumber;
     }
     public void openAccount(){
-        // System.out.println("opening account");
-
-        BankUtilities.all_accounts[0] = new Account();
-        BankUtilities.all_accounts[0].setData(12345,"Nelly","Merc",4213, 9999, 500.58);
-        System.out.println(BankUtilities.all_accounts);
+        System.out.println("opening account ...");
+        Account newAccount = new Account(12345,"Nelly","Merc",4213, 9999, 500.58);
+        System.out.println(newAccount.accNumber);
+        System.out.println(newAccount.getClass().getSimpleName());
+        all_accounts.add(newAccount);
+        System.out.println(all_accounts);
     }
     public void getAccountInfoAndBalance(){
         System.out.println("Getting account info and balance");

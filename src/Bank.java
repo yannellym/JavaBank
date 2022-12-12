@@ -1,6 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
 
 public class Bank{
-    static Account[] all_accounts;
-    all_accounts = new Account[2];
-
+    List <Account> all_accounts = new ArrayList<Account>(10);
 }
