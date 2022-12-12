@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
-public class BankManager {
+public class BankManager extends Bank {
     Scanner scanner = new Scanner(System.in);
-    Bank bank = new Bank();
+    // Bank bank = new Bank();
     BankUtilities utilities = new BankUtilities();
 
     public void printMenu() {
@@ -47,42 +47,44 @@ public class BankManager {
             System.out.println("Choice is not in options. Please try again");
             continuousMenu();
         }
-
-        switch (user_choice) {
-            case 1:
-                utilities.openAccount();
-                break;
-            case 2:
-                utilities.getAccountInfoAndBalance();
-                break;
-            case 3:
-                utilities.changePin();
-                break;
-            case 4:
-                utilities.depositMoneyToAccount();
-                break;
-            case 5:
-                utilities.transferBetweenAccounts();
-                break;
-            case 6:
-                utilities.withdrawFromAccount();
-                break;
-            case 7:
-                utilities.withdrawFromATM();
-                break;
-            case 8:
-                utilities.depositChange();
-                break;
-            case 9:
-                utilities.closeAccount();
-                break;
-            case 10:
-                utilities.addMonthlyInterest();
-                continuousMenu();
-            case 11:
-                System.out.println("Thank you for using JavaBank. Have a good day!");
-                break;
+        if (user_choice == 11) {
+            System.out.println("Thank you for using JavaBank. Have a good day!");
+        } else {
+            switch (user_choice) {
+                case 1:
+                    utilities.openAccount();
+                    break;
+                case 2:
+                    utilities.getAccountInfoAndBalance();
+                    break;
+                case 3:
+                    utilities.changePin();
+                    break;
+                case 4:
+                    utilities.depositMoneyToAccount();
+                    break;
+                case 5:
+                    utilities.transferBetweenAccounts();
+                    break;
+                case 6:
+                    utilities.withdrawFromAccount();
+                    break;
+                case 7:
+                    utilities.withdrawFromATM();
+                    break;
+                case 8:
+                    utilities.depositChange();
+                    break;
+                case 9:
+                    utilities.closeAccount();
+                    break;
+                case 10:
+                    utilities.addMonthlyInterest();
+                    continuousMenu();
+                case 12:
+                    System.out.println(utilities.all_accounts);
+            }
+            continuousMenu();
         }
-
     }
 }

@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -45,11 +47,23 @@ public class BankUtilities extends Bank{
     }
     public void openAccount(){
         System.out.println("opening account ...");
-        Account newAccount = new Account(12345,"Nelly","Merc",4213, 9999, 500.58);
-        System.out.println(newAccount.accNumber);
-        System.out.println(newAccount.getClass().getSimpleName());
+        String firstName = promptUserForString("Enter your first name: ");
+        String lastName = promptUserForString("Enter your last name: ");
+        System.out.println("Enter your SSN: ");
+        int SSN = scanner.nextInt();
+
+        int num = 0;
+        String randomNums = "";
+
+        while( num < 10){
+            randomNums = randomNums + generateRandomInteger(0,9);
+            num = num + 1;
+        }
+        long acc_number = Long.parseLong(randomNums);
+        Account newAccount = new Account(acc_number,firstName,lastName, SSN, 9999, 500.58);
+        // System.out.println(newAccount.getClass().getSimpleName());
         all_accounts.add(newAccount);
-        System.out.println(all_accounts);
+        System.out.println("Account " + newAccount.accNumber + " was created.");
     }
     public void getAccountInfoAndBalance(){
         System.out.println("Getting account info and balance");
