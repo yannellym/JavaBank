@@ -1,5 +1,3 @@
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -60,13 +58,28 @@ public class BankUtilities extends Bank{
             num = num + 1;
         }
         long acc_number = Long.parseLong(randomNums);
-        Account newAccount = new Account(acc_number,firstName,lastName, SSN, 9999, 500.58);
+        Account newAccount = new Account(acc_number,firstName,lastName, SSN, 999);
         // System.out.println(newAccount.getClass().getSimpleName());
         all_accounts.add(newAccount);
         System.out.println("Account " + newAccount.accNumber + " was created.");
     }
     public void getAccountInfoAndBalance(){
-        System.out.println("Getting account info and balance");
+        System.out.println("Please enter an account number: ");
+        long accNumber = scanner.nextLong();
+        for (Account singleAccount : all_accounts){
+            if (singleAccount.accNumber == accNumber){
+                System.out.println("Please enter PIN:");
+                int accPin = scanner.nextInt();
+                if(accPin != singleAccount.PIN){
+                    System.out.println("Invalid PIN");
+                    getAccountInfoAndBalance();
+                }
+                System.out.println(singleAccount.balance);
+                return;
+            }
+        }
+        System.out.println("Account not found for account number:" + accNumber);
+        getAccountInfoAndBalance();
     }
     public void changePin(){
         System.out.println("Changing PIN");
