@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class BankManager extends Bank {
     Scanner scanner = new Scanner(System.in);
-    // Bank bank = new Bank();
     BankUtilities utilities = new BankUtilities();
 
     public void printMenu() {

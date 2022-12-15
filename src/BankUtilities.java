@@ -73,6 +73,13 @@ public class BankUtilities extends Bank {
         return res;
     }
     public Boolean verifyUser(long accNumber, int accPin){
+        // looks through the all_accounts array list
+        // if an account in the array list matches the account number provided
+        // by the user, and if the pin in that account matches the pin provided
+        // by the user, return true
+        // if the pin is incorrect, print invalid pin and redirect to menu,
+        // if account number doesn't exist, print no account found and redirect
+        // to menu. If everything else doesn't execute, return false.
         for (Account singleAccount : all_accounts) {
             if (singleAccount.accNumber == accNumber) {
                 if (accPin == singleAccount.PIN) {
@@ -87,6 +94,22 @@ public class BankUtilities extends Bank {
             }
         }
         return false;
+    }
+    public int getAccountIndex(long accNumber){
+        int accIndex = 0;
+        // create a for loop that loops through the all_accounts arrayList
+        // if the single account matches an account in that array
+        // get the index, and set accIndex to that index.
+        for (Account singleAccount : all_accounts) {
+            // i  will initially be 0
+            int i = 0;
+            if (singleAccount.accNumber == accNumber) {
+                accIndex = i;
+            }
+            // increment i for every step
+            i++;
+        }
+        return accIndex;
     }
     public void getAccountInfoAndBalance() {
         // call the promptForAccountNumberAndPin function which returns an ArrayList
@@ -105,49 +128,56 @@ public class BankUtilities extends Bank {
         }
     }
     public void printAccountInfo(long accNumber){
-        int accIndex = 0;
-        // create a for loop that loops through the all_accounts arrayList
-        // if the single account matches an account in that array
-        // get the index, and set accIndex to that index.
-        for (Account singleAccount : all_accounts) {
-            // i  will initially be 0
-            int i = 0;
-            if (singleAccount.accNumber == accNumber) {
-              accIndex = i;
-            }
-            // increment i for every step
-            i++;
-        }
+        int accIndex = getAccountIndex(accNumber);
         // save the account in a variable for easy access when printing out the information
         Account selectedAcct = all_accounts.get(accIndex);
         // variable will contain all the information from the selected account
         // Uses getters to access the information
+        long ssn = selectedAcct.getSsn();
+        String ssnString = Long.toString(ssn);
+        String lastFour = ssnString.substring(ssnString.length()-4);
+
         String info = """
                 Account Number : %d
                 Owner First Name: %s
                 Owner Last Name: %s
-                Owner SSN: XXX-XX-%d
+                Owner SSN: XXX-XX-%s
                 PIN: %d
                 Balance: $ %f
                 """.formatted(selectedAcct.getAccNumber(), selectedAcct.getOwnerFirstName(),
-                selectedAcct.getOwnerLastName(), selectedAcct.getSsn(),
+                selectedAcct.getOwnerLastName(), lastFour,
                 selectedAcct.getPIN(), selectedAcct.getBalance()
         );
         System.out.println(info);
     }
-    public long convertFromDollarsToCents(double dollars) {
-
-        return (long) dollars;
-    }
     public void changePin() {
+        ArrayList<Object> info = promptForAccountNumberAndPIN();
 
-        System.out.println("Changing PIN");
+        // the two values accessed from the info arrayList are cast into the correct type
+        long accNumber = (long) info.get(0);
+        int accPin = (int) info.get(1);
+        // call the verifyUser function which will verify the user and return a boolean
+        Boolean verified =  verifyUser(accNumber, accPin);
+        if(verified){
+            System.out.println("Enter new PIN: ");
+            int newPIN = scanner.nextInt();
+            System.out.println("Enter new PIN again to confirm: ");
+            int newPINconfirmed = scanner.nextInt();
+            if(newPIN == newPINconfirmed){
+                int accIndex = getAccountIndex(accNumber);
+                all_accounts.get(accIndex).setPIN(newPIN);
+                System.out.println("PIN updated successfully!");
+            } else{
+                System.out.println("PINs do not match. Try again.");
+            }
+        } else{
+            System.out.println("Wrong account number or PIN. Please try again.");
+        }
     }
 
     public void depositMoneyToAccount() {
         System.out.println("Depositing Money to account");
     }
-
     public void transferBetweenAccounts() {
         System.out.println("Transferring money between accounts");
     }
