@@ -29,7 +29,7 @@ public class BankManager extends Bank {
         // parse the input of the user into an int.
         int user_choice = Integer.parseInt(scanner.next());
         // valid user choices
-        int[] choices = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+        int[] choices = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
 
 //      if the user choice is a number
 //      and the user choice is in the valid user choices

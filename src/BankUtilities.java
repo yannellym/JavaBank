@@ -1,3 +1,4 @@
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
@@ -38,7 +39,6 @@ public class BankUtilities extends Bank {
         return randomNums;
     }
     public void openAccount() {
-        System.out.println("opening account ...");
         String firstName = promptUserForString("Enter your first name: ");
         String lastName = promptUserForString("Enter your last name: ");
         System.out.println("Enter your SSN: ");
@@ -53,6 +53,7 @@ public class BankUtilities extends Bank {
         Account newAccount = new Account(acc_number, firstName, lastName, SSN, pin);
         // adds new account to all_accounts in Bank array
         all_accounts.add(newAccount);
+        System.out.println(" *** Account opened successfully! *** ");
         // prints out the account's information
         printAccountInfo(acc_number);
     }
@@ -133,6 +134,9 @@ public class BankUtilities extends Bank {
         Account selectedAcct = all_accounts.get(accIndex);
         // variable will contain all the information from the selected account
         // Uses getters to access the information
+
+        // gets the account's SSN, and converts it to a string
+        // takes this string and gets the last four digits of SSN
         long ssn = selectedAcct.getSsn();
         String ssnString = Long.toString(ssn);
         String lastFour = ssnString.substring(ssnString.length()-4);
@@ -158,11 +162,15 @@ public class BankUtilities extends Bank {
         int accPin = (int) info.get(1);
         // call the verifyUser function which will verify the user and return a boolean
         Boolean verified =  verifyUser(accNumber, accPin);
+        // if the user is verified, ask to enter and verify the new PIN
         if(verified){
             System.out.println("Enter new PIN: ");
             int newPIN = scanner.nextInt();
             System.out.println("Enter new PIN again to confirm: ");
             int newPINconfirmed = scanner.nextInt();
+            // If the new PIN matches the verified PIN,
+            // call the getAccountIndex function and get the account's index
+            // update the pin of that account and display a success message
             if(newPIN == newPINconfirmed){
                 int accIndex = getAccountIndex(accNumber);
                 all_accounts.get(accIndex).setPIN(newPIN);
@@ -176,7 +184,25 @@ public class BankUtilities extends Bank {
     }
 
     public void depositMoneyToAccount() {
-        System.out.println("Depositing Money to account");
+        ArrayList<Object> info = promptForAccountNumberAndPIN();
+
+        // the two values accessed from the info arrayList are cast into the correct type
+        long accNumber = (long) info.get(0);
+        int accPin = (int) info.get(1);
+        // call the verifyUser function which will verify the user and return a boolean
+        Boolean verified =  verifyUser(accNumber, accPin);
+        // if the user is verified, ask to enter and verify the new PIN
+        if(verified){
+            System.out.println("Enter the amount to deposit in dollars and cents (e.g 2.57): ");
+            double amountToDeposit = scanner.nextDouble();
+            int accIndex = getAccountIndex(accNumber);
+            double previousBalance = all_accounts.get(accIndex).getBalance();
+            double newBalance = previousBalance + amountToDeposit;
+            all_accounts.get(accIndex).setBalance(newBalance);
+            System.out.println("New balance: %g".formatted(all_accounts.get(accIndex).getBalance()));
+        } else{
+            System.out.println("Wrong account number or PIN. Please try again.");
+        }
     }
     public void transferBetweenAccounts() {
         System.out.println("Transferring money between accounts");
