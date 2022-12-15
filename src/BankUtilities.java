@@ -23,6 +23,20 @@ public class BankUtilities extends Bank {
         String name = scanner.next();
         return name;
     }
+    public String generateRandomInts(int target){
+        // set num to 0 to be our iterator
+        int num = 0;
+        // randomNums will be our initial string
+        String randomNums = "";
+        // while num is less than the target number inputted
+        // add a random number to the string, increase num
+        // return the string randomNums
+        while (num < target) {
+            randomNums = randomNums + generateRandomInteger(0, 9);
+            num = num + 1;
+        }
+        return randomNums;
+    }
     public void openAccount() {
         System.out.println("opening account ...");
         String firstName = promptUserForString("Enter your first name: ");
@@ -30,18 +44,17 @@ public class BankUtilities extends Bank {
         System.out.println("Enter your SSN: ");
         int SSN = scanner.nextInt();
 
-        int num = 0;
-        String randomNums = "";
-
-        while (num < 10) {
-            randomNums = randomNums + generateRandomInteger(0, 9);
-            num = num + 1;
-        }
-        long acc_number = Long.parseLong(randomNums);
-        Account newAccount = new Account(acc_number, firstName, lastName, SSN, 999);
-        // System.out.println(newAccount.getClass().getSimpleName());
+        // call the generateRandomInts function to generate random number
+        // sequences for both the account numbers and the PIN
+        // The function returns a string so this makes sure to parse it
+        long acc_number = Long.parseLong(generateRandomInts(10));
+        int pin = Integer.parseInt(generateRandomInts(4));
+        // creates a new account
+        Account newAccount = new Account(acc_number, firstName, lastName, SSN, pin);
+        // adds new account to all_accounts in Bank array
         all_accounts.add(newAccount);
-        System.out.println("Account " + newAccount.accNumber + " was created.");
+        // prints out the account's information
+        printAccountInfo(acc_number);
     }
     public ArrayList<Object> promptForAccountNumberAndPIN() {
         ArrayList<Object> res = new ArrayList<Object>();
@@ -59,18 +72,12 @@ public class BankUtilities extends Bank {
         // returns an arrayList of two values (account number, and account pin)
         return res;
     }
-    public void getAccountInfoAndBalance() {
-        // call the promptForAccountNumberAndPin function which returns an ArrayList
-        // save the response above in an arr called info of type ArrayList<Object>
-        ArrayList<Object> info = promptForAccountNumberAndPIN();
-
-        // the two values accessed from the info arrayList are cast into the correct type
-        long accNumber = (long) info.get(0);
-        int accPin = (int) info.get(1);
-
+    public Boolean verifyUser(long accNumber, int accPin){
         for (Account singleAccount : all_accounts) {
             if (singleAccount.accNumber == accNumber) {
-                if (accPin != singleAccount.PIN) {
+                if (accPin == singleAccount.PIN) {
+                    return true;
+                } else {
                     System.out.println("Invalid PIN");
                     getAccountInfoAndBalance();
                 }
@@ -79,8 +86,54 @@ public class BankUtilities extends Bank {
                 getAccountInfoAndBalance();
             }
         }
-        return true;
+        return false;
     }
+    public void getAccountInfoAndBalance() {
+        // call the promptForAccountNumberAndPin function which returns an ArrayList
+        // save the response above in an arr called info of type ArrayList<Object>
+        ArrayList<Object> info = promptForAccountNumberAndPIN();
+
+        // the two values accessed from the info arrayList are cast into the correct type
+        long accNumber = (long) info.get(0);
+        int accPin = (int) info.get(1);
+        // call the verifyUser function which will verify the user and return a boolean
+        Boolean verified =  verifyUser(accNumber, accPin);
+        // if the user is verified, show the account's information
+        // else, call this function again to prompt for account number and pin
+        if (verified) {
+            printAccountInfo(accNumber);
+        }
+    }
+    public void printAccountInfo(long accNumber){
+        int accIndex = 0;
+        // create a for loop that loops through the all_accounts arrayList
+        // if the single account matches an account in that array
+        // get the index, and set accIndex to that index.
+        for (Account singleAccount : all_accounts) {
+            // i  will initially be 0
+            int i = 0;
+            if (singleAccount.accNumber == accNumber) {
+              accIndex = i;
+            }
+            // increment i for every step
+            i++;
+        }
+        // save the account in a variable for easy access when printing out the information
+        Account selectedAcct = all_accounts.get(accIndex);
+        // variable will contain all the information from the selected account
+        // Uses getters to access the information
+        String info = """
+                Account Number : %d
+                Owner First Name: %s
+                Owner Last Name: %s
+                Owner SSN: XXX-XX-%d
+                PIN: %d
+                Balance: $ %f
+                """.formatted(selectedAcct.getAccNumber(), selectedAcct.getOwnerFirstName(),
+                selectedAcct.getOwnerFirstName(), selectedAcct.getSsn(),
+                selectedAcct.getPIN(), selectedAcct.getBalance()
+        );
+        System.out.println(info);
     }
     public long convertFromDollarsToCents(double dollars) {
 
@@ -118,5 +171,6 @@ public class BankUtilities extends Bank {
     public void addMonthlyInterest() {
         System.out.println("Adding a monthly interest to all accounts");
     }
+
 
 }
