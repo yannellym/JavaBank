@@ -88,7 +88,10 @@ public class BankManager extends Bank {
                     utilities.addMonthlyInterest();
                     continuousMenu();
                 case 12:
-                    System.out.println(utilities.all_accounts);
+                    for(Account singleAccount: utilities.all_accounts){
+                        System.out.println(singleAccount.getOwnerFirstName());
+                    }
+
             }
             continuousMenu();
         }

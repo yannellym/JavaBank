@@ -1,4 +1,3 @@
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
@@ -39,7 +38,9 @@ public class BankUtilities extends Bank {
         return randomNums;
     }
     public void openAccount() {
-        String firstName = promptUserForString("Enter your first name: ");
+        System.out.println("Enter first name");
+
+        String firstName = scanner.next();
         String lastName = promptUserForString("Enter your last name: ");
         System.out.println("Enter your SSN: ");
         int SSN = scanner.nextInt();
@@ -101,9 +102,8 @@ public class BankUtilities extends Bank {
         // create a for loop that loops through the all_accounts arrayList
         // if the single account matches an account in that array
         // get the index, and set accIndex to that index.
+        int i = 0;
         for (Account singleAccount : all_accounts) {
-            // i  will initially be 0
-            int i = 0;
             if (singleAccount.accNumber == accNumber) {
                 accIndex = i;
             }
