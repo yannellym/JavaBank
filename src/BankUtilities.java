@@ -130,7 +130,7 @@ public class BankUtilities extends Bank {
                 PIN: %d
                 Balance: $ %f
                 """.formatted(selectedAcct.getAccNumber(), selectedAcct.getOwnerFirstName(),
-                selectedAcct.getOwnerFirstName(), selectedAcct.getSsn(),
+                selectedAcct.getOwnerLastName(), selectedAcct.getSsn(),
                 selectedAcct.getPIN(), selectedAcct.getBalance()
         );
         System.out.println(info);

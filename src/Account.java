@@ -20,6 +20,9 @@ public class Account {
     public String getOwnerFirstName() {
         return ownerFirstName;
     }
+    public String getOwnerLastName() {
+        return ownerLastName;
+    }
 
     public long getSsn() {
         return ssn;

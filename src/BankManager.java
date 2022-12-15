@@ -27,7 +27,8 @@ public class BankManager extends Bank {
     public void continuousMenu() {
         printMenu();
         System.out.println("Please enter your menu choice: ");
-        int user_choice = scanner.nextInt();
+        // parse the input of the user into an int.
+        int user_choice = Integer.parseInt(scanner.next());
         // valid user choices
         int[] choices = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
@@ -37,16 +38,22 @@ public class BankManager extends Bank {
 //      else, if the user choice is not in the valid user choices, redirect them to the menu again
 //      if the user choice is not a number, redirect them to the menu again
         try {
+            int choice = user_choice;
             Boolean checkChoice = false;
             for (int option : choices) {
-                if (option == user_choice) {
+                if (option == choice) {
                     checkChoice = true;
                 }
             }
-        } catch (Exception e) {
-            System.out.println("Choice is not in options. Please try again");
+            if (!checkChoice){
+                System.out.println("This choice is not a menu option. Please try again");
+                continuousMenu();
+            }
+        } catch (Exception InputMismatchException) {
+            System.out.println("Choice is not a number. Please try again");
             continuousMenu();
         }
+
         if (user_choice == 11) {
             System.out.println("Thank you for using JavaBank. Have a good day!");
         } else {
