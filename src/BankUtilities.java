@@ -87,7 +87,7 @@ public class BankUtilities extends Bank {
                 }
             }
         }
-        System.out.println("Account not found for account" + accountNumber);
+        System.out.printf("Account not found for account %d", accountNumber);
         return false;
     }
     public int getAccountIndex(long accNumber){
@@ -329,7 +329,22 @@ public class BankUtilities extends Bank {
     }
 
     public void closeAccount() {
-        System.out.println("Closing account");
+        ArrayList<Object> info = promptForAccountNumberAndPIN();
+
+        // the two values accessed from the info arrayList are cast into the correct type
+        long accNumber = (long) info.get(0);
+        int accPin = (int) info.get(1);
+        // call the verifyUser function which will verify the user and return a boolean
+        Boolean verified = verifyUser(accNumber, accPin);
+        int index = getAccountIndex(accNumber);
+        /*
+         If the user is verified, ask them to enter a withdrawal amount
+         if the withdrawal amount is less than or equal to 0, print amount cannot be negative, return.
+        */
+        if (verified) {
+            all_accounts.remove(index);
+            System.out.printf("Account %d has been closed %n", accNumber);
+        }
     }
 
     public void addMonthlyInterest() {
