@@ -5,14 +5,13 @@ import java.util.concurrent.ThreadLocalRandom;
 public class BankUtilities extends Bank {
     Scanner scanner = new Scanner(System.in);
     public int generateRandomInteger(int minVal, int maxVal) {
-        int randomNumber = ThreadLocalRandom.current().nextInt(minVal, maxVal + 1);
-        return randomNumber;
+        return ThreadLocalRandom.current().nextInt(minVal, maxVal + 1);
     }
     public double promptUserForPositiveNumber(String prompt) {
         System.out.println(prompt);
-        Double positiveNum = scanner.nextDouble();
+        double positiveNum = scanner.nextDouble();
 
-        while (positiveNum <= 0) {
+        if(positiveNum <= 0) {
             System.out.println("Amount cannot be negative. Try again. ");
             return promptUserForPositiveNumber(prompt);
         }
@@ -20,22 +19,21 @@ public class BankUtilities extends Bank {
     }
     public String promptUserForString(String prompt) {
         System.out.println(prompt);
-        String name = scanner.next();
-        return name;
+        return scanner.next();
     }
     public String generateRandomInts(int target){
         // set num to 0 to be our iterator
         int num = 0;
         // randomNums will be our initial string
-        String randomNums = "";
+        StringBuilder randomNums = new StringBuilder();
         // while num is less than the target number inputted
         // add a random number to the string, increase num
         // return the string randomNums
         while (num < target) {
-            randomNums = randomNums + generateRandomInteger(0, 9);
+            randomNums.append(generateRandomInteger(0, 9));
             num = num + 1;
         }
-        return randomNums;
+        return randomNums.toString();
     }
     public void openAccount() {
         String firstName = promptUserForString("Enter your first name: ");
@@ -57,7 +55,7 @@ public class BankUtilities extends Bank {
         printAccountInfo(acc_number);
     }
     public ArrayList<Object> promptForAccountNumberAndPIN() {
-        ArrayList<Object> res = new ArrayList<Object>();
+        ArrayList<Object> res = new ArrayList<>();
 
         System.out.println("Please enter an account number: ");
         long accNumber = scanner.nextLong();
@@ -194,7 +192,7 @@ public class BankUtilities extends Bank {
             double previousBalance = all_accounts.get(accIndex).getBalance();
             double newBalance = previousBalance + amountToDeposit;
             all_accounts.get(accIndex).setBalance(newBalance);
-            System.out.println("New balance: %g".formatted(all_accounts.get(accIndex).getBalance()));
+            System.out.printf("New balance: %g%n", all_accounts.get(accIndex).getBalance());
         } else{
             System.out.println("Wrong account number or PIN. Please try again.");
         }
@@ -234,8 +232,8 @@ public class BankUtilities extends Bank {
                     all_accounts.get(indexOfTo).setBalance(balanceOfTo + amountToTransfer);
                     all_accounts.get(indexOfFrom).setBalance(balanceOfFrom - amountToTransfer);
                     System.out.println("Transfer Complete! ");
-                    System.out.println("New balance in account: %d is: $ %g".formatted(accNumber, all_accounts.get(indexOfFrom).getBalance()));
-                    System.out.println("New balance in account: %d is: $ %g".formatted(transferAccNumber,all_accounts.get(indexOfTo).getBalance()));
+                    System.out.printf("New balance in account: %d is: $ %g%n", accNumber, all_accounts.get(indexOfFrom).getBalance());
+                    System.out.printf("New balance in account: %d is: $ %g%n", transferAccNumber,all_accounts.get(indexOfTo).getBalance());
                 } else{
                     System.out.println("Not enough funds! Try again.");
                 }
@@ -262,22 +260,68 @@ public class BankUtilities extends Bank {
                 System.out.println("Amount cannot be negative. Try again.");
                 return;
             }
-            // if the account has less money than what the user is trying to withdraw
-            // print no funds
-            // else, subtract the amount from the account's balance, print new acc balance
+            /*
+             if the account has less money than what the user is trying to withdraw
+             print no funds
+             else, subtract the amount from the account's balance, print new acc balance
+            */
             if (balanceOfAcc < withdrawAmount) {
                 System.out.println("Not enough funds! Try again.");
             } else{
                 double initialBal = all_accounts.get(index).getBalance();
                 all_accounts.get(index).setBalance(initialBal - withdrawAmount);
                 System.out.println("Dispensing money... Withdrawal Complete! ");
-                System.out.println("New balance in account: %d is: $ %g".formatted(accNumber, all_accounts.get(index).getBalance()));
+                System.out.printf("New balance is: $ %g%n", all_accounts.get(index).getBalance());
             }
         }
     }
 
     public void withdrawFromATM() {
-        System.out.println("Withdrawing money from ATM");
+        ArrayList<Object> info = promptForAccountNumberAndPIN();
+
+        // the two values accessed from the info arrayList are cast into the correct type
+        long accNumber = (long) info.get(0);
+        int accPin = (int) info.get(1);
+        // call the verifyUser function which will verify the user and return a boolean
+        Boolean verified =  verifyUser(accNumber, accPin);
+        int index = getAccountIndex(accNumber);
+        double balanceOfAcc = all_accounts.get(index).getBalance();
+        /*
+         If the user is verified, ask them to enter a withdrawal amount
+         if the withdrawal amount is less than or equal to 0, print amount cannot be negative, return.
+        */
+        if (verified) {
+            System.out.println("Enter an amount to withdraw in dollars (no cents) in multiples of $5 (limit $1000) :");
+            int withdrawAmount = scanner.nextInt();
+            // if withdraw amount is less than 5, greater than 1000, or not divisible by 5
+            // display "invalid amount", return to menu.
+            if (withdrawAmount < 5 | withdrawAmount > 1000 | withdrawAmount % 5 != 0) {
+                System.out.println("Invalid amount. Try again.");
+            } else{
+                /*
+                 divide the original amount by 20, and take the result and multiply by 20
+                 take the above result and subtract it from the original amount.
+                 the above result become the new amount
+                 Repeat the above for 10 and 5.
+                */
+                int twenty = Math.floorDiv(withdrawAmount, 20);
+                int newAmount = twenty * 20;
+                newAmount = withdrawAmount - newAmount;
+                int ten = Math.floorDiv(newAmount , 10);
+                newAmount = ten * 10;
+                newAmount = newAmount - ten;
+                int five = Math.floorDiv(newAmount , 5);
+                /*
+                 Withdraw from account and show number of bills
+                 display final account balance.
+                */
+                all_accounts.get(index).setBalance(balanceOfAcc - withdrawAmount);
+                System.out.printf("Number of 20-Dollar bills: %d%n", twenty);
+                System.out.printf("Number of 10-Dollar bills: %d%n", ten);
+                System.out.printf("Number of 5-Dollar bills: %d%n", five);
+                System.out.printf("New balance: $ %g%n", all_accounts.get(index).getBalance());
+            }
+        }
     }
 
     public void depositChange() {

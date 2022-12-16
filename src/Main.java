@@ -23,16 +23,5 @@ public class Main {
     public static void main(String[] args) {
         BankManager manager = new BankManager();
         manager.continuousMenu();
-
-
-
-//        String prompt = "Please enter a number: ";
-//        BankUtilities utilities = new BankUtilities();
-//        // Double positiveNum = utilities.promptUserForPositiveNumber(prompt);
-//        // int randomNum = utilities.generateRandomInteger(1,5);
-//        long wholeDollar = utilities.convertFromDollarsToCents(3.57);
-//        System.out.println(wholeDollar);
-
-
     }
 }
