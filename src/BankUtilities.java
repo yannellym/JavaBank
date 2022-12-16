@@ -38,9 +38,7 @@ public class BankUtilities extends Bank {
         return randomNums;
     }
     public void openAccount() {
-        System.out.println("Enter first name");
-
-        String firstName = scanner.next();
+        String firstName = promptUserForString("Enter your first name: ");
         String lastName = promptUserForString("Enter your last name: ");
         System.out.println("Enter your SSN: ");
         int SSN = scanner.nextInt();
@@ -74,7 +72,7 @@ public class BankUtilities extends Bank {
         // returns an arrayList of two values (account number, and account pin)
         return res;
     }
-    public Boolean verifyUser(long accNumber, int accPin){
+    public Boolean verifyUser(long accountNumber, int accPin) {
         // looks through the all_accounts array list
         // if an account in the array list matches the account number provided
         // by the user, and if the pin in that account matches the pin provided
@@ -83,18 +81,15 @@ public class BankUtilities extends Bank {
         // if account number doesn't exist, print no account found and redirect
         // to menu. If everything else doesn't execute, return false.
         for (Account singleAccount : all_accounts) {
-            if (singleAccount.accNumber == accNumber) {
+            if (singleAccount.accNumber == accountNumber) {
                 if (accPin == singleAccount.PIN) {
                     return true;
                 } else {
                     System.out.println("Invalid PIN");
-                    getAccountInfoAndBalance();
                 }
-            } else {
-                System.out.println("Account not found for account number:" + accNumber);
-                getAccountInfoAndBalance();
             }
         }
+        System.out.println("Account not found for account" + accountNumber);
         return false;
     }
     public int getAccountIndex(long accNumber){
@@ -205,7 +200,41 @@ public class BankUtilities extends Bank {
         }
     }
     public void transferBetweenAccounts() {
-        System.out.println("Transferring money between accounts");
+        System.out.println("Account to transfer from: ");
+        ArrayList<Object> info = promptForAccountNumberAndPIN();
+
+        // the two values accessed from the info arrayList are cast into the correct type
+        long accNumber = (long) info.get(0);
+        int accPin = (int) info.get(1);
+        // call the verifyUser function which will verify the user and return a boolean
+        Boolean verified =  verifyUser(accNumber, accPin);
+        if (verified){
+            System.out.println("Account to transfer to: ");
+            ArrayList<Object> transferInfo = promptForAccountNumberAndPIN();
+
+            // the two values accessed from the info arrayList are cast into the correct type
+            long transferAccNumber = (long) transferInfo.get(0);
+            int transferAccPin = (int) transferInfo.get(1);
+            // call the verifyUser function which will verify the user and return a boolean
+            Boolean transferVerified =  verifyUser(transferAccNumber, transferAccPin);
+            if(transferVerified){
+                System.out.println("Enter amount to transfer in dollars and cents. Ex 2.57 : ");
+                double amountToTransfer = scanner.nextDouble();
+                int indexOfFrom = all_accounts.indexOf(accNumber);
+                double balanceOfFrom = all_accounts.get(indexOfFrom).getBalance();
+                if(balanceOfFrom > amountToTransfer){
+                    int indexOfTo = all_accounts.indexOf(transferAccNumber);
+                    double balanceOfTo = all_accounts.get(indexOfTo).getBalance();
+                    all_accounts.get(indexOfTo).setBalance(balanceOfTo + amountToTransfer);
+                    all_accounts.get(indexOfFrom).setBalance(balanceOfFrom - amountToTransfer);
+                    System.out.println("Transfer Complete! ");
+                    System.out.println("New balance in account: %d is: %g".formatted(accNumber, all_accounts.get(indexOfFrom).getBalance()));
+                    System.out.println("New balance in account: %d is: %g".formatted(transferAccNumber,all_accounts.get(indexOfTo).getBalance()));
+                } else{
+                    System.out.println("Not enough funds! Try again.");
+                }
+            }
+        }
     }
 
     public void withdrawFromAccount() {
