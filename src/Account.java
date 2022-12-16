@@ -9,7 +9,7 @@ public class Account {
         this.accNumber = accNumber;
         this.ownerFirstName = ownerFirstName;
         this.ownerLastName = ownerLastName;
-        this.ssn = ssn;
+        this.setSsn(ssn);
         this.PIN = PIN;
         this.balance = 0.00;
     }

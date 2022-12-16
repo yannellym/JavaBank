@@ -38,10 +38,11 @@ public class BankManager extends Bank {
 //      if the user choice is not a number, redirect them to the menu again
         try {
             int choice = user_choice;
-            Boolean checkChoice = false;
+            boolean checkChoice = false;
             for (int option : choices) {
                 if (option == choice) {
                     checkChoice = true;
+                    break;
                 }
             }
             if (!checkChoice){

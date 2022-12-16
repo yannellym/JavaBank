@@ -325,7 +325,57 @@ public class BankUtilities extends Bank {
     }
 
     public void depositChange() {
-        System.out.println("Depositing Change to account");
+        ArrayList<Object> info = promptForAccountNumberAndPIN();
+
+        // the two values accessed from the info arrayList are cast into the correct type
+        long accNumber = (long) info.get(0);
+        int accPin = (int) info.get(1);
+        // call the verifyUser function which will verify the user and return a boolean
+        Boolean verified = verifyUser(accNumber, accPin);
+        int index = getAccountIndex(accNumber);
+        double balanceOfAcc = all_accounts.get(index).getBalance();
+        /*
+         If the user is verified, ask them to enter a withdrawal amount
+         if the withdrawal amount is less than or equal to 0, print amount cannot be negative, return.
+        */
+        if (verified) {
+            // check each character from the user's input
+            // match them with the value of the corresponding letter
+            // add it to the deposit_amt variable
+            // if coin not in the possible values, display it and don't add it to deposit
+            System.out.println("Deposit coins (P: penny, N: nickel, D: dime, Q: Quarter, H: half-dollar, W: whole-dollar) Ex(QPDNNDHW):");
+            String coins = scanner.next().toUpperCase();
+            float deposit_amt = 0;
+            for (char singleCoin : coins.toCharArray()) {
+                switch (singleCoin) {
+                    case 'P':
+                        deposit_amt += .01;
+                        break;
+                    case 'N':
+                        deposit_amt += .05;
+                        break;
+                    case 'D':
+                        deposit_amt += .10;
+                        break;
+                    case 'Q':
+                        deposit_amt += .25;
+                        break;
+                    case 'H':
+                        deposit_amt += .50;
+                        break;
+                    case 'W':
+                        deposit_amt += 1;
+                        break;
+                    default:
+                        System.out.printf("Invalid coin: %s%n", singleCoin);
+                }
+            }
+            // add the deposit amount to account
+            // display the new balance
+            all_accounts.get(index).setBalance(balanceOfAcc + deposit_amt);
+            System.out.printf("$ %f in coins deposited into account %n", deposit_amt);
+            System.out.printf("New balance: %g%n", all_accounts.get(index).getBalance());
+        }
     }
 
     public void closeAccount() {
@@ -338,8 +388,8 @@ public class BankUtilities extends Bank {
         Boolean verified = verifyUser(accNumber, accPin);
         int index = getAccountIndex(accNumber);
         /*
-         If the user is verified, ask them to enter a withdrawal amount
-         if the withdrawal amount is less than or equal to 0, print amount cannot be negative, return.
+         If the user is verified, remove the account from the array list
+         Print that the account has been closed
         */
         if (verified) {
             all_accounts.remove(index);
@@ -348,8 +398,18 @@ public class BankUtilities extends Bank {
     }
 
     public void addMonthlyInterest() {
-        System.out.println("Adding a monthly interest to all accounts");
+        System.out.println("Enter an annual interest rate percentage: ");
+        float annualRate = scanner.nextFloat();
+        for (Account singleAccount: all_accounts){
+            /*
+             calculate the monthly rate by taking the annual rate and multiplying it by
+             the account's balance. Then, divided this by 12, signifying the months in a year
+             finally, divide by 100 to get the interest.
+            */
+            double monthlyRate = ((annualRate * singleAccount.getBalance()) / 12) / 100;
+            singleAccount.setBalance(singleAccount.getBalance() + monthlyRate);
+            System.out.printf("Deposited interest: %g into account number: %d%n", monthlyRate, singleAccount.getAccNumber());
+            System.out.printf("New balance: %g%n",singleAccount.getBalance());
+        }
     }
-
-
 }
