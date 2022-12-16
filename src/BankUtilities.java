@@ -220,16 +220,22 @@ public class BankUtilities extends Bank {
             if(transferVerified){
                 System.out.println("Enter amount to transfer in dollars and cents. Ex 2.57 : ");
                 double amountToTransfer = scanner.nextDouble();
-                int indexOfFrom = all_accounts.indexOf(accNumber);
+                int indexOfFrom = getAccountIndex(accNumber);
                 double balanceOfFrom = all_accounts.get(indexOfFrom).getBalance();
+                if(amountToTransfer <= 0){
+                    System.out.println("Amount cannot be negative. Try again.");
+                    return;
+                }
+                // If the account to transfer from has less money than the transfer amount
+                // Show "not enough funds" and have the user try again.
                 if(balanceOfFrom > amountToTransfer){
-                    int indexOfTo = all_accounts.indexOf(transferAccNumber);
+                    int indexOfTo = getAccountIndex(transferAccNumber);
                     double balanceOfTo = all_accounts.get(indexOfTo).getBalance();
                     all_accounts.get(indexOfTo).setBalance(balanceOfTo + amountToTransfer);
                     all_accounts.get(indexOfFrom).setBalance(balanceOfFrom - amountToTransfer);
                     System.out.println("Transfer Complete! ");
-                    System.out.println("New balance in account: %d is: %g".formatted(accNumber, all_accounts.get(indexOfFrom).getBalance()));
-                    System.out.println("New balance in account: %d is: %g".formatted(transferAccNumber,all_accounts.get(indexOfTo).getBalance()));
+                    System.out.println("New balance in account: %d is: $ %g".formatted(accNumber, all_accounts.get(indexOfFrom).getBalance()));
+                    System.out.println("New balance in account: %d is: $ %g".formatted(transferAccNumber,all_accounts.get(indexOfTo).getBalance()));
                 } else{
                     System.out.println("Not enough funds! Try again.");
                 }
@@ -238,7 +244,36 @@ public class BankUtilities extends Bank {
     }
 
     public void withdrawFromAccount() {
-        System.out.println("Withdrawing money from account");
+        ArrayList<Object> info = promptForAccountNumberAndPIN();
+
+        // the two values accessed from the info arrayList are cast into the correct type
+        long accNumber = (long) info.get(0);
+        int accPin = (int) info.get(1);
+        // call the verifyUser function which will verify the user and return a boolean
+        Boolean verified =  verifyUser(accNumber, accPin);
+        int index = getAccountIndex(accNumber);
+        double balanceOfAcc = all_accounts.get(index).getBalance();
+        // If the user is verified, ask them to enter a withdrawal amount
+        // if the withdrawal amount is less than or equal to 0, print amount cannot be negative, return.
+        if (verified){
+            System.out.println("Enter an amount to withdraw in dollars and cents: ");
+            double withdrawAmount = scanner.nextDouble();
+            if(withdrawAmount <= 0){
+                System.out.println("Amount cannot be negative. Try again.");
+                return;
+            }
+            // if the account has less money than what the user is trying to withdraw
+            // print no funds
+            // else, subtract the amount from the account's balance, print new acc balance
+            if (balanceOfAcc < withdrawAmount) {
+                System.out.println("Not enough funds! Try again.");
+            } else{
+                double initialBal = all_accounts.get(index).getBalance();
+                all_accounts.get(index).setBalance(initialBal - withdrawAmount);
+                System.out.println("Dispensing money... Withdrawal Complete! ");
+                System.out.println("New balance in account: %d is: $ %g".formatted(accNumber, all_accounts.get(index).getBalance()));
+            }
+        }
     }
 
     public void withdrawFromATM() {
