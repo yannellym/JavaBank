@@ -64,7 +64,6 @@ public class Account {
         // compare PIN with PIN on the account
         // if PINs match, return true , false otherwise.
         if (PIN == this.getPIN()) {
-            System.out.println("good PIN");
             return true;
         } else {
             System.out.println("Invalid PIN");

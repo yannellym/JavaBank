@@ -80,11 +80,12 @@ public class BankUtilities extends Bank {
         // to menu. If everything else doesn't execute, return false.
         for (Account singleAccount : all_accounts) {
             if (singleAccount.getAccNumber() == accountNumber) {
-                singleAccount.isValidPin(accPin);
-                break;
+                if(singleAccount.isValidPin(accPin)){
+                    return true;
+                }
             }
         }
-        System.out.printf("Account not found for account %d", accountNumber);
+        System.out.printf("Account not found for account %d%n", accountNumber);
         return false;
     }
     public int getAccountIndex(long accNumber){
