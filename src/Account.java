@@ -48,23 +48,27 @@ public class Account {
         this.balance = balance;
     }
 
-    public long deposit(long depositAmount){
-        // take the amount and deposit it into the account
-        // return a long representing a new account balance
-        return 1234;
+    public double deposit(double depositAmount){
+        double previousBalance = this.getBalance();
+        double newBalance = previousBalance + depositAmount;
+        this.setBalance(newBalance);
+        return newBalance;
     }
-    public long withdraw(long withdrawAmount){
-        // take the amount, subtract it from the account balance
-        // return a long representing the new account balance
-        return 5000;
+    public double withdraw(double withdrawAmount){
+        double initialBalance = this.getBalance();
+        double newBalance = initialBalance + withdrawAmount;
+        this.setBalance(newBalance);
+        return newBalance;
     }
-    public boolean isValidPin(String PIN){
-        // compare pIN with PIN on the account
-        // if PINS match, return true , false otherwise.
-        return true;
-    }
-    public String toString(){
-        // return a string that contains all values in account
-        return "String";
+    public boolean isValidPin(int PIN) {
+        // compare PIN with PIN on the account
+        // if PINs match, return true , false otherwise.
+        if (PIN == this.getPIN()) {
+            System.out.println("good PIN");
+            return true;
+        } else {
+            System.out.println("Invalid PIN");
+            return false;
+        }
     }
 }

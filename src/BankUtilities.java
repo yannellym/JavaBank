@@ -79,12 +79,9 @@ public class BankUtilities extends Bank {
         // if account number doesn't exist, print no account found and redirect
         // to menu. If everything else doesn't execute, return false.
         for (Account singleAccount : all_accounts) {
-            if (singleAccount.accNumber == accountNumber) {
-                if (accPin == singleAccount.PIN) {
-                    return true;
-                } else {
-                    System.out.println("Invalid PIN");
-                }
+            if (singleAccount.getAccNumber() == accountNumber) {
+                singleAccount.isValidPin(accPin);
+                break;
             }
         }
         System.out.printf("Account not found for account %d", accountNumber);
@@ -97,7 +94,7 @@ public class BankUtilities extends Bank {
         // get the index, and set accIndex to that index.
         int i = 0;
         for (Account singleAccount : all_accounts) {
-            if (singleAccount.accNumber == accNumber) {
+            if (singleAccount.getAccNumber() == accNumber) {
                 accIndex = i;
             }
             // increment i for every step
@@ -189,10 +186,8 @@ public class BankUtilities extends Bank {
             System.out.println("Enter the amount to deposit in dollars and cents (e.g 2.57): ");
             double amountToDeposit = scanner.nextDouble();
             int accIndex = getAccountIndex(accNumber);
-            double previousBalance = all_accounts.get(accIndex).getBalance();
-            double newBalance = previousBalance + amountToDeposit;
-            all_accounts.get(accIndex).setBalance(newBalance);
-            System.out.printf("New balance: %g%n", all_accounts.get(accIndex).getBalance());
+            double newBalance = all_accounts.get(accIndex).deposit(amountToDeposit);
+            System.out.printf("New balance: %g%n", newBalance);
         } else{
             System.out.println("Wrong account number or PIN. Please try again.");
         }
@@ -228,12 +223,11 @@ public class BankUtilities extends Bank {
                 // Show "not enough funds" and have the user try again.
                 if(balanceOfFrom > amountToTransfer){
                     int indexOfTo = getAccountIndex(transferAccNumber);
-                    double balanceOfTo = all_accounts.get(indexOfTo).getBalance();
-                    all_accounts.get(indexOfTo).setBalance(balanceOfTo + amountToTransfer);
-                    all_accounts.get(indexOfFrom).setBalance(balanceOfFrom - amountToTransfer);
+                    double newToBalance = all_accounts.get(indexOfTo).deposit(amountToTransfer);
+                    double newFromBalance = all_accounts.get(indexOfFrom).withdraw(amountToTransfer);
                     System.out.println("Transfer Complete! ");
-                    System.out.printf("New balance in account: %d is: $ %g%n", accNumber, all_accounts.get(indexOfFrom).getBalance());
-                    System.out.printf("New balance in account: %d is: $ %g%n", transferAccNumber,all_accounts.get(indexOfTo).getBalance());
+                    System.out.printf("New balance in account: %d is: $ %g%n", accNumber, newFromBalance);
+                    System.out.printf("New balance in account: %d is: $ %g%n", transferAccNumber,newToBalance);
                 } else{
                     System.out.println("Not enough funds! Try again.");
                 }
@@ -268,10 +262,9 @@ public class BankUtilities extends Bank {
             if (balanceOfAcc < withdrawAmount) {
                 System.out.println("Not enough funds! Try again.");
             } else{
-                double initialBal = all_accounts.get(index).getBalance();
-                all_accounts.get(index).setBalance(initialBal - withdrawAmount);
+                double finalBal = all_accounts.get(index).withdraw(withdrawAmount);
                 System.out.println("Dispensing money... Withdrawal Complete! ");
-                System.out.printf("New balance is: $ %g%n", all_accounts.get(index).getBalance());
+                System.out.printf("New balance is: $ %g%n",finalBal);
             }
         }
     }
@@ -315,11 +308,11 @@ public class BankUtilities extends Bank {
                  Withdraw from account and show number of bills
                  display final account balance.
                 */
-                all_accounts.get(index).setBalance(balanceOfAcc - withdrawAmount);
+                double finalBal = all_accounts.get(index).withdraw(withdrawAmount);
                 System.out.printf("Number of 20-Dollar bills: %d%n", twenty);
                 System.out.printf("Number of 10-Dollar bills: %d%n", ten);
                 System.out.printf("Number of 5-Dollar bills: %d%n", five);
-                System.out.printf("New balance: $ %g%n", all_accounts.get(index).getBalance());
+                System.out.printf("New balance: $ %g%n", finalBal);
             }
         }
     }
@@ -333,7 +326,6 @@ public class BankUtilities extends Bank {
         // call the verifyUser function which will verify the user and return a boolean
         Boolean verified = verifyUser(accNumber, accPin);
         int index = getAccountIndex(accNumber);
-        double balanceOfAcc = all_accounts.get(index).getBalance();
         /*
          If the user is verified, ask them to enter a withdrawal amount
          if the withdrawal amount is less than or equal to 0, print amount cannot be negative, return.
@@ -348,33 +340,20 @@ public class BankUtilities extends Bank {
             float deposit_amt = 0;
             for (char singleCoin : coins.toCharArray()) {
                 switch (singleCoin) {
-                    case 'P':
-                        deposit_amt += .01;
-                        break;
-                    case 'N':
-                        deposit_amt += .05;
-                        break;
-                    case 'D':
-                        deposit_amt += .10;
-                        break;
-                    case 'Q':
-                        deposit_amt += .25;
-                        break;
-                    case 'H':
-                        deposit_amt += .50;
-                        break;
-                    case 'W':
-                        deposit_amt += 1;
-                        break;
-                    default:
-                        System.out.printf("Invalid coin: %s%n", singleCoin);
+                    case 'P' -> deposit_amt += .01;
+                    case 'N' -> deposit_amt += .05;
+                    case 'D' -> deposit_amt += .10;
+                    case 'Q' -> deposit_amt += .25;
+                    case 'H' -> deposit_amt += .50;
+                    case 'W' -> deposit_amt += 1;
+                    default -> System.out.printf("Invalid coin: %s%n", singleCoin);
                 }
             }
             // add the deposit amount to account
             // display the new balance
-            all_accounts.get(index).setBalance(balanceOfAcc + deposit_amt);
+            double newBalance = all_accounts.get(index).deposit(deposit_amt);
             System.out.printf("$ %f in coins deposited into account %n", deposit_amt);
-            System.out.printf("New balance: %g%n", all_accounts.get(index).getBalance());
+            System.out.printf("New balance: %g%n", newBalance);
         }
     }
 
@@ -407,9 +386,9 @@ public class BankUtilities extends Bank {
              finally, divide by 100 to get the interest.
             */
             double monthlyRate = ((annualRate * singleAccount.getBalance()) / 12) / 100;
-            singleAccount.setBalance(singleAccount.getBalance() + monthlyRate);
+            double newBalance = singleAccount.deposit(monthlyRate);
             System.out.printf("Deposited interest: %g into account number: %d%n", monthlyRate, singleAccount.getAccNumber());
-            System.out.printf("New balance: %g%n",singleAccount.getBalance());
+            System.out.printf("New balance: %g%n",newBalance);
         }
     }
 }
