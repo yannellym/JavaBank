@@ -49,10 +49,11 @@ public class BankUtilities extends Bank {
         // creates a new account
         Account newAccount = new Account(acc_number, firstName, lastName, SSN, pin);
         // adds new account to all_accounts in Bank array
-        all_accounts.add(newAccount);
-        System.out.println(" *** Account opened successfully! *** ");
-        // prints out the account's information
-        printAccountInfo(acc_number);
+        if (addAccountToBank(newAccount)){
+            System.out.println(" *** Account opened successfully! *** ");
+            // prints out the account's information
+            printAccountInfo(acc_number);
+        };
     }
     public ArrayList<Object> promptForAccountNumberAndPIN() {
         ArrayList<Object> res = new ArrayList<>();
