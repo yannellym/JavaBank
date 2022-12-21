@@ -53,7 +53,7 @@ public class BankUtilities extends Bank {
             System.out.println(" *** Account opened successfully! *** ");
             // prints out the account's information
             printAccountInfo(acc_number);
-        };
+        }
     }
     public ArrayList<Object> promptForAccountNumberAndPIN() {
         ArrayList<Object> res = new ArrayList<>();
@@ -83,6 +83,8 @@ public class BankUtilities extends Bank {
             if (singleAccount.getAccNumber() == accountNumber) {
                 if(singleAccount.isValidPin(accPin)){
                     return true;
+                } else{
+                    return false;
                 }
             }
         }
@@ -223,7 +225,7 @@ public class BankUtilities extends Bank {
                 }
                 // If the account to transfer from has less money than the transfer amount
                 // Show "not enough funds" and have the user try again.
-                if(balanceOfFrom > amountToTransfer){
+                if(balanceOfFrom >= amountToTransfer){
                     int indexOfTo = getAccountIndex(transferAccNumber);
                     double newToBalance = all_accounts.get(indexOfTo).deposit(amountToTransfer);
                     double newFromBalance = all_accounts.get(indexOfFrom).withdraw(amountToTransfer);
@@ -280,7 +282,6 @@ public class BankUtilities extends Bank {
         // call the verifyUser function which will verify the user and return a boolean
         Boolean verified =  verifyUser(accNumber, accPin);
         int index = getAccountIndex(accNumber);
-        double balanceOfAcc = all_accounts.get(index).getBalance();
         /*
          If the user is verified, ask them to enter a withdrawal amount
          if the withdrawal amount is less than or equal to 0, print amount cannot be negative, return.
@@ -373,8 +374,12 @@ public class BankUtilities extends Bank {
          Print that the account has been closed
         */
         if (verified) {
-            all_accounts.remove(index);
-            System.out.printf("Account %d has been closed %n", accNumber);
+            Boolean removed = removeAccountFromBank(all_accounts.get(index));
+            if(removed){
+                System.out.printf("Account %d has been closed %n", accNumber);
+            } else {
+                System.out.printf("Account %d has NOT been closed. Try again %n", accNumber);
+            }
         }
     }
 

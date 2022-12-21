@@ -1,16 +1,16 @@
 public class Account {
-    public long accNumber;
-    public String ownerFirstName;
-    public String ownerLastName;
-    public long ssn;
-    public int PIN;
-    public double balance;
+    private final long accNumber;
+    private final String ownerFirstName;
+    private final String ownerLastName;
+    private long ssn;
+    private int PIN;
+    private double balance;
     public Account(long accNumber, String ownerFirstName, String ownerLastName, long ssn, int PIN){
         this.accNumber = accNumber;
         this.ownerFirstName = ownerFirstName;
         this.ownerLastName = ownerLastName;
         this.setSsn(ssn);
-        this.PIN = PIN;
+        this.setPIN(PIN);
         this.balance = 0.00;
     }
     public long getAccNumber() {
@@ -56,7 +56,7 @@ public class Account {
     }
     public double withdraw(double withdrawAmount){
         double initialBalance = this.getBalance();
-        double newBalance = initialBalance + withdrawAmount;
+        double newBalance = initialBalance - withdrawAmount;
         this.setBalance(newBalance);
         return newBalance;
     }
