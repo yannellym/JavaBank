@@ -382,20 +382,4 @@ public class BankUtilities extends Bank {
             }
         }
     }
-
-    public void addMonthlyInterest() {
-        System.out.println("Enter an annual interest rate percentage: ");
-        float annualRate = scanner.nextFloat();
-        for (Account singleAccount: all_accounts){
-            /*
-             calculate the monthly rate by taking the annual rate and multiplying it by
-             the account's balance. Then, divided this by 12, signifying the months in a year
-             finally, divide by 100 to get the interest.
-            */
-            double monthlyRate = ((annualRate * singleAccount.getBalance()) / 12) / 100;
-            double newBalance = singleAccount.deposit(monthlyRate);
-            System.out.printf("Deposited interest: %g into account number: %d%n", monthlyRate, singleAccount.getAccNumber());
-            System.out.printf("New balance: %g%n",newBalance);
-        }
-    }
 }
