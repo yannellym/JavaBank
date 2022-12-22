@@ -291,7 +291,9 @@ public class BankUtilities extends Bank {
             int withdrawAmount = scanner.nextInt();
             // if withdraw amount is less than 5, greater than 1000, or not divisible by 5
             // display "invalid amount", return to menu.
-            if (withdrawAmount < 5 | withdrawAmount > 1000 | withdrawAmount % 5 != 0) {
+            if(withdrawAmount > all_accounts.get(index).getBalance()){
+                System.out.println("Insufficient funds. Please try again.");
+            } else if (withdrawAmount < 5 | withdrawAmount > 1000 | withdrawAmount % 5 != 0) {
                 System.out.println("Invalid amount. Try again.");
             } else{
                 /*
@@ -304,8 +306,7 @@ public class BankUtilities extends Bank {
                 int newAmount = twenty * 20;
                 newAmount = withdrawAmount - newAmount;
                 int ten = Math.floorDiv(newAmount , 10);
-                newAmount = ten * 10;
-                newAmount = newAmount - ten;
+                newAmount -= ten * 10;
                 int five = Math.floorDiv(newAmount , 5);
                 /*
                  Withdraw from account and show number of bills
