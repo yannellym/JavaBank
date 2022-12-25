@@ -17,10 +17,19 @@ public class BankUtilities extends Bank {
         }
         return positiveNum;
     }
-    public String promptUserForString(String prompt) {
-        System.out.println(prompt);
-        return scanner.next();
-    }
+
+    public static boolean isInt(String s){
+        boolean res;
+
+        try {
+            Integer.parseInt(s);
+            res = true;
+        } catch (NumberFormatException e) {
+            res = false;
+        }
+
+        return res;
+        }
     public String generateRandomInts(int target){
         // set num to 0 to be our iterator
         int num = 0;
@@ -35,24 +44,33 @@ public class BankUtilities extends Bank {
         }
         return randomNums.toString();
     }
+    public String promptUserForString(String prompt) {
+        System.out.println(prompt);
+        return scanner.next();
+    }
     public void openAccount() {
         String firstName = promptUserForString("Enter your first name: ");
         String lastName = promptUserForString("Enter your last name: ");
-        System.out.println("Enter your SSN: ");
-        int SSN = scanner.nextInt();
+        if(isInt(firstName) | isInt(lastName) | firstName.length() < 3 | lastName.length() < 3){
+            System.out.println("Names must be letters only.");
+            openAccount();
+        } else {
+            System.out.println("Enter your SSN: ");
+            long SSN = scanner.nextLong();
 
-        // call the generateRandomInts function to generate random number
-        // sequences for both the account numbers and the PIN
-        // The function returns a string so this makes sure to parse it
-        long acc_number = Long.parseLong(generateRandomInts(10));
-        int pin = Integer.parseInt(generateRandomInts(4));
-        // creates a new account
-        Account newAccount = new Account(acc_number, firstName, lastName, SSN, pin);
-        // adds new account to all_accounts in Bank array
-        if (addAccountToBank(newAccount)){
-            System.out.println(" *** Account opened successfully! *** ");
-            // prints out the account's information
-            printAccountInfo(acc_number);
+            // call the generateRandomInts function to generate random number
+            // sequences for both the account numbers and the PIN
+            // The function returns a string so this makes sure to parse it
+            long acc_number = Long.parseLong(generateRandomInts(10));
+            int pin = Integer.parseInt(generateRandomInts(4));
+            // creates a new account
+            Account newAccount = new Account(acc_number, firstName, lastName, SSN, pin);
+            // adds new account to all_accounts in Bank array
+            if (addAccountToBank(newAccount)) {
+                System.out.println(" *** Account opened successfully! *** ");
+                // prints out the account's information
+                printAccountInfo(acc_number);
+            }
         }
     }
     public ArrayList<Object> promptForAccountNumberAndPIN() {
@@ -81,11 +99,7 @@ public class BankUtilities extends Bank {
         // to menu. If everything else doesn't execute, return false.
         for (Account singleAccount : all_accounts) {
             if (singleAccount.getAccNumber() == accountNumber) {
-                if(singleAccount.isValidPin(accPin)){
-                    return true;
-                } else{
-                    return false;
-                }
+                return singleAccount.isValidPin(accPin);
             }
         }
         System.out.printf("Account not found for account %d%n", accountNumber);
