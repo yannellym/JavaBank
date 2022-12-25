@@ -51,13 +51,16 @@ public class BankUtilities extends Bank {
     public void openAccount() {
         String firstName = promptUserForString("Enter your first name: ");
         String lastName = promptUserForString("Enter your last name: ");
+        System.out.println("Enter your SSN: ");
+        long SSN = scanner.nextLong();
+
         if(isInt(firstName) | isInt(lastName) | firstName.length() < 3 | lastName.length() < 3){
             System.out.println("Names must be letters only.");
             openAccount();
-        } else {
-            System.out.println("Enter your SSN: ");
-            long SSN = scanner.nextLong();
-
+        } else if(String.valueOf(SSN).length() != 9){
+            System.out.println("SSN must be 9 digits long. Try again");
+            openAccount();
+        }else {
             // call the generateRandomInts function to generate random number
             // sequences for both the account numbers and the PIN
             // The function returns a string so this makes sure to parse it
@@ -82,6 +85,13 @@ public class BankUtilities extends Bank {
         System.out.println("Please enter PIN:");
         int accPin = scanner.nextInt();
 
+        if((String.valueOf(accNumber)).length() != 10){
+            System.out.println("Account number must be 10 digits long.");
+            getAccountInfoAndBalance();
+        } else if ((String.valueOf(accPin)).length() != 4){
+            System.out.println("PIN must be 4 digits long.");
+            getAccountInfoAndBalance();
+        }
         // add both variables to the arrayList
         res.add(accNumber);
         res.add(accPin);
@@ -90,13 +100,15 @@ public class BankUtilities extends Bank {
         return res;
     }
     public Boolean verifyUser(long accountNumber, int accPin) {
-        // looks through the all_accounts array list
-        // if an account in the array list matches the account number provided
-        // by the user, and if the pin in that account matches the pin provided
-        // by the user, return true
-        // if the pin is incorrect, print invalid pin and redirect to menu,
-        // if account number doesn't exist, print no account found and redirect
-        // to menu. If everything else doesn't execute, return false.
+        /*
+         looks through the all_accounts array list
+         if an account in the array list matches the account number provided
+         by the user, and if the pin in that account matches the pin provided
+         by the user, return true
+         if the pin is incorrect, print invalid pin and redirect to menu,
+         if account number doesn't exist, print no account found and redirect
+         to menu. If everything else doesn't execute, return false.
+        */
         for (Account singleAccount : all_accounts) {
             if (singleAccount.getAccNumber() == accountNumber) {
                 return singleAccount.isValidPin(accPin);
@@ -124,10 +136,10 @@ public class BankUtilities extends Bank {
         // call the promptForAccountNumberAndPin function which returns an ArrayList
         // save the response above in an arr called info of type ArrayList<Object>
         ArrayList<Object> info = promptForAccountNumberAndPIN();
-
         // the two values accessed from the info arrayList are cast into the correct type
         long accNumber = (long) info.get(0);
         int accPin = (int) info.get(1);
+
         // call the verifyUser function which will verify the user and return a boolean
         Boolean verified =  verifyUser(accNumber, accPin);
         // if the user is verified, show the account's information
