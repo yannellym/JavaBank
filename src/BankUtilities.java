@@ -31,8 +31,6 @@ public class BankUtilities extends Bank {
         return res;
         }
     public String generateRandomInts(int target){
-        // set num to 0 to be our iterator
-        String num = "";
         // randomNums will be our initial string
         StringBuilder randomNums = new StringBuilder();
         // while num is less than the target number inputted
@@ -41,7 +39,6 @@ public class BankUtilities extends Bank {
         while (randomNums.length() != target) {
             randomNums.append(generateRandomInteger(1, 9));
             System.out.println(randomNums);
-            num = num + 1;
         }
         return randomNums.toString();
     }
@@ -118,6 +115,20 @@ public class BankUtilities extends Bank {
         System.out.printf("Account not found for account %d%n", accountNumber);
         return false;
     }
+    public ArrayList promptAndVerify(){
+        ArrayList<Object> info =  promptForAccountNumberAndPIN();
+        // the two values accessed from the info arrayList are cast into the correct type
+        long accNumber = (long) info.get(0);
+        int accPin = (int) info.get(1);
+        // call the verifyUser function which will verify the user and return a boolean
+        Boolean verified =  verifyUser(accNumber, accPin);
+
+        ArrayList<Object> res = new ArrayList<>();
+        res.add(accNumber);
+        res.add(accPin);
+        res.add(verified);
+        return res;
+    }
     public int getAccountIndex(long accNumber){
         int accIndex = 0;
         // create a for loop that loops through the all_accounts arrayList
@@ -134,15 +145,10 @@ public class BankUtilities extends Bank {
         return accIndex;
     }
     public void getAccountInfoAndBalance() {
-        // call the promptForAccountNumberAndPin function which returns an ArrayList
-        // save the response above in an arr called info of type ArrayList<Object>
-        ArrayList<Object> info = promptForAccountNumberAndPIN();
-        // the two values accessed from the info arrayList are cast into the correct type
+        ArrayList info = promptAndVerify();
         long accNumber = (long) info.get(0);
-        int accPin = (int) info.get(1);
+        boolean verified = (boolean) info.get(2);
 
-        // call the verifyUser function which will verify the user and return a boolean
-        Boolean verified =  verifyUser(accNumber, accPin);
         // if the user is verified, show the account's information
         // else, call this function again to prompt for account number and pin
         if (verified) {
@@ -203,15 +209,10 @@ public class BankUtilities extends Bank {
             System.out.println("Wrong account number or PIN. Please try again.");
         }
     }
-
     public void depositMoneyToAccount() {
-        ArrayList<Object> info = promptForAccountNumberAndPIN();
-
-        // the two values accessed from the info arrayList are cast into the correct type
+        ArrayList info = promptAndVerify();
         long accNumber = (long) info.get(0);
-        int accPin = (int) info.get(1);
-        // call the verifyUser function which will verify the user and return a boolean
-        Boolean verified =  verifyUser(accNumber, accPin);
+        boolean verified = (boolean) info.get(2);
         // if the user is verified, ask to enter and verify the new PIN
         if(verified){
             System.out.println("Enter the amount to deposit in dollars and cents (e.g 2.57): ");
@@ -225,13 +226,9 @@ public class BankUtilities extends Bank {
     }
     public void transferBetweenAccounts() {
         System.out.println("Account to transfer from: ");
-        ArrayList<Object> info = promptForAccountNumberAndPIN();
-
-        // the two values accessed from the info arrayList are cast into the correct type
+        ArrayList info = promptAndVerify();
         long accNumber = (long) info.get(0);
-        int accPin = (int) info.get(1);
-        // call the verifyUser function which will verify the user and return a boolean
-        Boolean verified =  verifyUser(accNumber, accPin);
+        boolean verified = (boolean) info.get(2);
         if (verified){
             System.out.println("Account to transfer to: ");
             ArrayList<Object> transferInfo = promptForAccountNumberAndPIN();
@@ -267,13 +264,10 @@ public class BankUtilities extends Bank {
     }
 
     public void withdrawFromAccount() {
-        ArrayList<Object> info = promptForAccountNumberAndPIN();
-
-        // the two values accessed from the info arrayList are cast into the correct type
+        ArrayList info = promptAndVerify();
         long accNumber = (long) info.get(0);
-        int accPin = (int) info.get(1);
-        // call the verifyUser function which will verify the user and return a boolean
-        Boolean verified =  verifyUser(accNumber, accPin);
+        boolean verified = (boolean) info.get(2);
+
         int index = getAccountIndex(accNumber);
         double balanceOfAcc = all_accounts.get(index).getBalance();
         // If the user is verified, ask them to enter a withdrawal amount
@@ -301,13 +295,10 @@ public class BankUtilities extends Bank {
     }
 
     public void withdrawFromATM() {
-        ArrayList<Object> info = promptForAccountNumberAndPIN();
-
-        // the two values accessed from the info arrayList are cast into the correct type
+        ArrayList info = promptAndVerify();
         long accNumber = (long) info.get(0);
-        int accPin = (int) info.get(1);
-        // call the verifyUser function which will verify the user and return a boolean
-        Boolean verified =  verifyUser(accNumber, accPin);
+        boolean verified = (boolean) info.get(2);
+
         int index = getAccountIndex(accNumber);
         /*
          If the user is verified, ask them to enter a withdrawal amount
@@ -349,13 +340,10 @@ public class BankUtilities extends Bank {
     }
 
     public void depositChange() {
-        ArrayList<Object> info = promptForAccountNumberAndPIN();
-
-        // the two values accessed from the info arrayList are cast into the correct type
+        ArrayList info = promptAndVerify();
         long accNumber = (long) info.get(0);
-        int accPin = (int) info.get(1);
-        // call the verifyUser function which will verify the user and return a boolean
-        Boolean verified = verifyUser(accNumber, accPin);
+        boolean verified = (boolean) info.get(2);
+
         int index = getAccountIndex(accNumber);
         /*
          If the user is verified, ask them to enter a withdrawal amount
@@ -389,13 +377,10 @@ public class BankUtilities extends Bank {
     }
 
     public void closeAccount() {
-        ArrayList<Object> info = promptForAccountNumberAndPIN();
-
-        // the two values accessed from the info arrayList are cast into the correct type
+        ArrayList info = promptAndVerify();
         long accNumber = (long) info.get(0);
-        int accPin = (int) info.get(1);
-        // call the verifyUser function which will verify the user and return a boolean
-        Boolean verified = verifyUser(accNumber, accPin);
+        boolean verified = (boolean) info.get(2);
+
         int index = getAccountIndex(accNumber);
         /*
          If the user is verified, remove the account from the array list
