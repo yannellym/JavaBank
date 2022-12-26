@@ -32,14 +32,15 @@ public class BankUtilities extends Bank {
         }
     public String generateRandomInts(int target){
         // set num to 0 to be our iterator
-        int num = 0;
+        String num = "";
         // randomNums will be our initial string
         StringBuilder randomNums = new StringBuilder();
         // while num is less than the target number inputted
         // add a random number to the string, increase num
         // return the string randomNums
-        while (num < target) {
-            randomNums.append(generateRandomInteger(0, 9));
+        while (randomNums.length() != target) {
+            randomNums.append(generateRandomInteger(1, 9));
+            System.out.println(randomNums);
             num = num + 1;
         }
         return randomNums.toString();
@@ -60,7 +61,7 @@ public class BankUtilities extends Bank {
         } else if(String.valueOf(SSN).length() != 9){
             System.out.println("SSN must be 9 digits long. Try again");
             openAccount();
-        }else {
+        }else{
             // call the generateRandomInts function to generate random number
             // sequences for both the account numbers and the PIN
             // The function returns a string so this makes sure to parse it
