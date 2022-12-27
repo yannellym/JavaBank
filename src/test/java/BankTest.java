@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ class BankTest {
     }
 
     @Test
+    @DisplayName("Removes account from bank and returns false")
     void removeAccountFromBankFalse() {
         var bank = new Bank();
         Account account1 = new Account(192837495, "Elizabeth", "Lopez", 987654229, 6569);
