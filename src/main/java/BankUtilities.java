@@ -135,8 +135,7 @@ public class BankUtilities extends Bank {
         // if the single account matches an account in that array
         // get the index, and set accIndex to that index.
         int i = 0;
-        for (Account singleAccount : all_accounts) {
-            if (singleAccount.getAccNumber() == accNumber) {
+        for (Account singleAccount : all_accounts) {if (singleAccount.getAccNumber() == accNumber) {
                 accIndex = i;
             }
             // increment i for every step
