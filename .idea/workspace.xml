@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e16c0dd4-67d4-45fb-a82c-59cce97ec63f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/BankTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BankUtilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BankUtilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Bank.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BankUtilitiesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BankUtilitiesTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/BankUtilities.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/BankUtilities.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Bank.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Bank.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/BankUtilitiesTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/BankUtilitiesTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,51 +65,51 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.BankUtilitiesTest">
-    <configuration name="BankUtilitiesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.BankTest">
+    <configuration name="BankTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaBankProject" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BankUtilitiesTest" />
+      <option name="MAIN_CLASS_NAME" value="BankTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BankUtilitiesTest.getAccountIndex" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BankTest.addAccountToBankFalse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaBankProject" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BankUtilitiesTest" />
-      <option name="METHOD_NAME" value="getAccountIndex" />
+      <option name="MAIN_CLASS_NAME" value="BankTest" />
+      <option name="METHOD_NAME" value="addAccountToBankFalse" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BankUtilitiesTest.getAccountIndexIncorrect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BankTest.addAccountToBankTrue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaBankProject" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BankUtilitiesTest" />
-      <option name="METHOD_NAME" value="getAccountIndexIncorrect" />
+      <option name="MAIN_CLASS_NAME" value="BankTest" />
+      <option name="METHOD_NAME" value="addAccountToBankTrue" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BankUtilitiesTest.getAccountIndexNotInAccounts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BankTest.removeAccountFromBankFalse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaBankProject" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BankUtilitiesTest" />
-      <option name="METHOD_NAME" value="getAccountIndexNotInAccounts" />
+      <option name="MAIN_CLASS_NAME" value="BankTest" />
+      <option name="METHOD_NAME" value="removeAccountFromBankFalse" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BankUtilitiesTest.verifyUserFalse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BankTest.removeAccountFromBankTrue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaBankProject" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BankUtilitiesTest" />
-      <option name="METHOD_NAME" value="verifyUserFalse" />
+      <option name="MAIN_CLASS_NAME" value="BankTest" />
+      <option name="METHOD_NAME" value="removeAccountFromBankTrue" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -116,11 +117,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.BankUtilitiesTest" />
-        <item itemvalue="JUnit.BankUtilitiesTest.getAccountIndexNotInAccounts" />
-        <item itemvalue="JUnit.BankUtilitiesTest.getAccountIndexIncorrect" />
-        <item itemvalue="JUnit.BankUtilitiesTest.getAccountIndex" />
-        <item itemvalue="JUnit.BankUtilitiesTest.verifyUserFalse" />
+        <item itemvalue="JUnit.BankTest" />
+        <item itemvalue="JUnit.BankTest.removeAccountFromBankFalse" />
+        <item itemvalue="JUnit.BankTest.removeAccountFromBankTrue" />
+        <item itemvalue="JUnit.BankTest.addAccountToBankFalse" />
+        <item itemvalue="JUnit.BankTest.addAccountToBankTrue" />
       </list>
     </recent_temporary>
   </component>
@@ -165,6 +166,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/JavaBankProject$BankUtilitiesTest.ic" NAME="BankUtilitiesTest Coverage Results" MODIFIED="1672174246169" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/JavaBankProject$BankUtilitiesTest_isIntStringTrue.ic" NAME="BankUtilitiesTest.isIntStringTrue Coverage Results" MODIFIED="1672171676373" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

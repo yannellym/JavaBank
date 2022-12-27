@@ -5,7 +5,7 @@ public class Bank{
     Scanner scanner = new Scanner(System.in);
     ArrayList <Account> all_accounts = new ArrayList<>(2);
     public Boolean addAccountToBank(Account newAccount){
-      if(all_accounts.size() < 3){
+      if(all_accounts.size() < 2){
         all_accounts.add(newAccount);
         return true;
       } else{

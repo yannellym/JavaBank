@@ -1,8 +1,5 @@
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class BankUtilitiesTest {
@@ -15,13 +12,11 @@ class BankUtilitiesTest {
 
     @Test
     void isIntStringTrue() {
-        var utilities = new BankUtilities();
-        assertTrue(utilities.isInt("44"));
+        assertTrue(BankUtilities.isInt("44"));
     }
     @Test
     void isIntStringFalse() {
-        var utilities = new BankUtilities();
-        assertFalse(utilities.isInt("Forty Four"));
+        assertFalse(BankUtilities.isInt("Forty Four"));
     }
 
     @Test
@@ -33,7 +28,7 @@ class BankUtilitiesTest {
     @Test
     void verifyUserTrue() {
         var utilities = new BankUtilities();
-        Account account = new Account(192837465, "Nelly","merc", 987654321, 6768);
+        Account account = new Account(192837465, "Nelly","Steven", 987654321, 6768);
         utilities.all_accounts.add(account);
         assertTrue(utilities.verifyUser(192837465, 6768));
     }
