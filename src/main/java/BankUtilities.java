@@ -38,7 +38,6 @@ public class BankUtilities extends Bank {
         // return the string randomNums
         while (randomNums.length() != target) {
             randomNums.append(generateRandomInteger(1, 9));
-            System.out.println(randomNums);
         }
         return randomNums.toString();
     }
