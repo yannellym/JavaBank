@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Bank{
+class Bank{
     Scanner scanner = new Scanner(System.in);
     ArrayList <Account> all_accounts = new ArrayList<>(2);
     public Boolean addAccountToBank(Account newAccount){

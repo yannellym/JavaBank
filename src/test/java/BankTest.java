@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +18,7 @@ class BankTest {
     }
 
     @Test
+    @Disabled(value = "disabled for demo of @disabled")
     void addAccountToBankFalse(){
         var bank = new Bank();
         Account account1 = new Account(192837495, "Elizabeth","Lopez", 987654229, 6569);

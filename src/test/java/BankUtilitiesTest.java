@@ -1,3 +1,6 @@
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -5,12 +8,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class BankUtilitiesTest {
 
     @Test
+    @RepeatedTest(value = 2)
     void generateRandomInteger() {
         var utilities = new BankUtilities();
         assertEquals(1, 2, utilities.generateRandomInteger(1,2));
     }
 
     @Test
+    @Tag("string") // To help find the function in case you want to filter tests
     void isIntStringTrue() {
         assertTrue(BankUtilities.isInt("44"));
     }
@@ -26,6 +31,7 @@ class BankUtilitiesTest {
     }
 
     @Test
+    @DisplayName("Verifies that the user is the owner of the account")
     void verifyUserTrue() {
         var utilities = new BankUtilities();
         Account account = new Account(192837465, "Nelly","Steven", 987654321, 6768);
