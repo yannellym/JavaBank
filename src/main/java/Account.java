@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Account extends Bank{
     private final long accNumber;
     private final String ownerFirstName;
@@ -71,14 +69,5 @@ public class Account extends Bank{
             System.out.println("Invalid PIN");
             return false;
         }
-    }
-    public Account findAccount(long accNum){
-        for(Account singleAccount: all_accounts){
-            if(singleAccount.getAccNumber() == accNum){
-                return singleAccount;
-            }
-        }
-        System.out.println("Account not found. Try again!");
-        return null;
     }
 }

@@ -5,23 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e16c0dd4-67d4-45fb-a82c-59cce97ec63f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_4_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_4_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_4_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_params_5_4_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_4_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_4_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_1_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/AccountTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaBankProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JavaBankProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Account.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Bank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BankManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BankManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BankTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BankTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BankUtilitiesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BankUtilitiesTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/BankTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/BankTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/BankUtilitiesTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/BankUtilitiesTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Account.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Bank.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Bank.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,62 +65,63 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="BankTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.AccountTest">
+    <configuration name="AccountTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaBankProject" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BankTest" />
+      <option name="MAIN_CLASS_NAME" value="AccountTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BankTest.addAccountToBankFalse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AccountTest.isValidPinFalse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaBankProject" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BankTest" />
-      <option name="METHOD_NAME" value="addAccountToBankFalse" />
+      <option name="MAIN_CLASS_NAME" value="AccountTest" />
+      <option name="METHOD_NAME" value="isValidPinFalse" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BankTest.removeAccountFromBankFalse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AccountTest.isValidPinTrue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaBankProject" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BankTest" />
-      <option name="METHOD_NAME" value="removeAccountFromBankFalse" />
+      <option name="MAIN_CLASS_NAME" value="AccountTest" />
+      <option name="METHOD_NAME" value="isValidPinTrue" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BankTest.removeAccountFromBankTrue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AccountTest.withdrawFalse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaBankProject" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BankTest" />
-      <option name="METHOD_NAME" value="removeAccountFromBankTrue" />
+      <option name="MAIN_CLASS_NAME" value="AccountTest" />
+      <option name="METHOD_NAME" value="withdrawFalse" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BankUtilitiesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AccountTest.withdrawTrueAlso" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaBankProject" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BankUtilitiesTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="AccountTest" />
+      <option name="METHOD_NAME" value="withdrawTrueAlso" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.BankUtilitiesTest" />
-        <item itemvalue="JUnit.BankTest" />
-        <item itemvalue="JUnit.BankTest.removeAccountFromBankFalse" />
-        <item itemvalue="JUnit.BankTest.removeAccountFromBankTrue" />
-        <item itemvalue="JUnit.BankTest.addAccountToBankFalse" />
+        <item itemvalue="JUnit.AccountTest" />
+        <item itemvalue="JUnit.AccountTest.withdrawTrueAlso" />
+        <item itemvalue="JUnit.AccountTest.isValidPinFalse" />
+        <item itemvalue="JUnit.AccountTest.isValidPinTrue" />
+        <item itemvalue="JUnit.AccountTest.withdrawFalse" />
       </list>
     </recent_temporary>
   </component>
@@ -172,6 +162,15 @@
           <properties class="java.lang.IndexOutOfBoundsException" package="java.lang" />
           <option name="timeStamp" value="5" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/test/java/AccountTest.java</url>
+          <line>117</line>
+          <properties class="AccountTest" method="withdrawTrue">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

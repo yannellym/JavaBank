@@ -16,8 +16,7 @@ class Bank{
     public Boolean removeAccountFromBank(Account singleAccount){
         for(Account individual_account: all_accounts){
             if(individual_account.getAccNumber() == singleAccount.getAccNumber()){
-                int index = all_accounts.indexOf(singleAccount);
-                all_accounts.remove(index);
+                all_accounts.remove(singleAccount);
                 return true;
             }
         }
